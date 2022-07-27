@@ -52,7 +52,7 @@ jobs:
           php-version: '8.0' # 環境に合わせて変更してください
           tools: composer:v2
       # composer install
-      - name: Resolve dependencies
+      # - name: Resolve dependencies
         # run: composer require --dev squizlabs/php_codesniffer
         # run: composer install
         # run: composer install --no-progress --prefer-dist --optimize-autoloader
