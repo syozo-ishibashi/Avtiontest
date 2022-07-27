@@ -7,19 +7,19 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - uses: shivammathur/setup-php@v1
         with:
           php-version: 7.4
           extensions: intl
           coverage: none
+
+      - name: Setup Mysql
+         run: mysql -u root -proot -e 'CREATE DATABASE test;'
       # - uses: actions/setup-node@v1
       # - run: npm install -g bats
       # - run: bats -v
 
-
-
-      # - name: Setup Mysql
-      #    run: mysql -u root -proot -e 'CREATE DATABASE test;'
 
       # - run: ls -la
 
