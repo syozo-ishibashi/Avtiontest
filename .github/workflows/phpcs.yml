@@ -30,8 +30,8 @@ jobs:
         run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'
         # run: ./vendor/bin/phpcbf --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'
 
-      - name: Exit code
-        run: exit 0
+      # - name: Exit code
+      #   run: exit 0
 
 
   # 静的解析用ジョブ（PHPStan + reviewdog）
