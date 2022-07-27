@@ -9,7 +9,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup PHP
-         use: shivammathur/setup-php@v1
+         uses: shivammathur/setup-php@v1
         with:
           php-version: 7.4
           extensions: intl
