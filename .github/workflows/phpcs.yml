@@ -3,7 +3,6 @@ name: reviewdog
 on: pull_request
 
 jobs:
-  # 構文チェック用ジョブ（PHP_CodeSniffer + reviewdog）
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +31,7 @@ jobs:
         # run: ./vendor/bin/phpcbf --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'
 
       - name: Exit code
-        run: exit 1
+        run: exit 0
 
 
   # 静的解析用ジョブ（PHPStan + reviewdog）
