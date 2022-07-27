@@ -5,6 +5,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
+
+
+
+
+
+
+
+
+
+
+      #    use: actions/checkout@v2
+      #    with:
+      #     fetch-depth: 0
+
+      # - name: Setup PHP
+      #    use: shivammathur/setup-php@v1
+      #   with:
+      #     php-version: 7.4
+      #     extensions: intl
+      #     coverage: none
+
+      # - name: Setup Mysql
+      #    run: mysql -u root -proot -e 'CREATE DATABASE test;'
+
+      # - run: ls -la
+
+      # - id: changed-files
+      #   use: tj-actions/changed-files@v18.5
+      #   run: echo steps.changed-files.outputs.all_changed_files
