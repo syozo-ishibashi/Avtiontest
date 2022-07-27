@@ -1,8 +1,13 @@
-<html>
- <head>
-  <title>PHP Test</title>
- </head>
- <body>
- <?php echo '<p>Hello World</p>'; ?> 
- </body>
-</html>
+<?php
+$a = 1;
+$b = 2;
+if($a < $b) {
+    echo $a;
+}a
+
+$a = 1;
+$b = 2;
+if($a < $b) {
+    echo $a;
+}a  
+?>
