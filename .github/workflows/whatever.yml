@@ -14,8 +14,7 @@ jobs:
           extensions: intl
           coverage: none
 
-      - name: Setup Mysql
-         run: mysql -u root -proot -e 'CREATE DATABASE test;'
+      - run: mysql -u root -proot -e 'CREATE DATABASE test;'
       # - uses: actions/setup-node@v1
       # - run: npm install -g bats
       # - run: bats -v
