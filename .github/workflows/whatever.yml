@@ -1,29 +1,52 @@
-name: learn-github-actions
-on: [push]
+# name: learn-github-actions
+# on: [push]
+# jobs:
+#   check-bats-version:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#         with:
+#           fetch-depth: 0
+
+#       - uses: shivammathur/setup-php@v1
+#         with:
+#           php-version: 7.4
+#           extensions: intl
+#           coverage: none
+
+#       - id: changed-files
+#         use: tj-actions/changed-files@v18.5
+#         run: echo steps.changed-files.outputs.all_changed_files
+
+      # - uses: chekalsky/phpcs-action@v1
+      # https://github.com/chekalsky/phpcs-action
+
+name: "CI"
+
+on:
+  pull_request:
+    paths:
+      - "**.php"
+      - "phpcs.xml"
+      - ".github/workflows/phpcs.yml"
+
 jobs:
-  check-bats-version:
+  phpcs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # important!
 
-      - uses: shivammathur/setup-php@v1
+      # we may use whatever way to install phpcs, just specify the path on the next step
+      # however, curl seems to be the fastest
+      - name: Install PHP_CodeSniffer
+        run: |
+          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+          php phpcs.phar --version
+
+      - uses: tinovyatkin/action-php-codesniffer@v1
         with:
-          php-version: 7.4
-          extensions: intl
-          coverage: none
-      - uses: chekalsky/phpcs-action@v1
-      # https://github.com/chekalsky/phpcs-action
-
-      # - run: mysql -u root -proot -e 'CREATE DATABASE test;'
-      # - uses: actions/setup-node@v1
-      # - run: npm install -g bats
-      # - run: bats -v
-
-
-      # - run: ls -la
-
-      # - id: changed-files
-      #   use: tj-actions/changed-files@v18.5
-      #   run: echo steps.changed-files.outputs.all_changed_files
+          files: "**.php" # you may customize glob as needed
+          phpcs_path: php phpcs.phar
+          standard: phpcs.xml
