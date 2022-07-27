@@ -16,7 +16,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 
         with:
-          php-version: '7.2.5'
+          php-version: '8.0' # 環境に合わせて変更してください
           tools: composer:v2
 
       # composer install
