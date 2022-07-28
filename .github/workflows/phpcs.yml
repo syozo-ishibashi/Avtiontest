@@ -36,13 +36,6 @@ jobs:
         run: |
           ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check -efm='%f:%l:%c:%m' -level=error
           ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
-      - name: Notify slack when job failed
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2.0.2
-        env:
-          SLACK_TITLE: Deploy flow / Failure
-          SLACK_COLOR: danger
-          SLACK_MESSAGE: Message for failure
 
   # 静的解析用
   # config : phpstan.neon
@@ -72,8 +65,18 @@ jobs:
           ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-check  -f=phpstan -level=error
           ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
 
+  slack_notification:
+    if: always()
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: status
+      - uses: technote-space/workflow-conclusion-action@v1
+      - run: |
+          echo "let's see the workflow conclusion"
+          echo ${{ env.WORKFLOW_CONCLUSION }}
       - name: Notify slack when job failed
-        if: ${{ failure() }}
+        # if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_TITLE: Deploy flow / Failure
