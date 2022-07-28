@@ -43,7 +43,7 @@ jobs:
 
 
   # 静的解析用
-  # config : Level analyse -l 0
+  # config : phpstan.neon
   analyse:
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
         # working-directory: ./
         run:  |
           pwd; find  ./
-          ./vendor/bin/phpstan analyse -l 0 --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
+          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
        
       - name: Success
         uses: rtCamp/action-slack-notify@v2.0.2
