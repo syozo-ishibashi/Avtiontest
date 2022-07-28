@@ -1,4 +1,5 @@
 name: CI
+# reviewdog でプルリクできないように管理
 
 on: pull_request
 
@@ -31,15 +32,15 @@ jobs:
       - name: lint
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./
-        run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check -efm='%f:%l:%c:%m' -level=error
-          # ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
-
+        # working-directory: ./
+        run: |
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check -efm='%f:%l:%c:%m' -level=error
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
 
   # 静的解析用
-  # TODO baseline
   # config : phpstan.neon
   analyse:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       # リポジトリからチェックアウト
@@ -62,29 +63,30 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # working-directory: ./
         run: |
-          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-check -f=phpstan -level=error
+          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-check  -f=phpstan -level=error
           ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
-       
-      - name: Success
-        uses: rtCamp/action-slack-notify@v2.0.2
-        if: success()
-        env:
-          SLACK_TITLE: Deploy flow / Success
-          SLACK_COLOR: good
-          SLACK_MESSAGE: Message for success
 
-      - name: Failure
+  slack_notification:
+    if: always()
+    needs: analyse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v1
+      - run: |
+          echo ${{ env.WORKFLOW_CONCLUSION }}
+
+      - name: Notify slack when job failed
+        if: env.WORKFLOW_CONCLUSION == 'failure'
         uses: rtCamp/action-slack-notify@v2.0.2
-        if: failure()
         env:
           SLACK_TITLE: Deploy flow / Failure
           SLACK_COLOR: danger
           SLACK_MESSAGE: Message for failure
 
-      - name: Cancel
+      - name: Notify slack when job success
+        if: env.WORKFLOW_CONCLUSION == 'success'
         uses: rtCamp/action-slack-notify@v2.0.2
-        if: cancelled()
         env:
-          SLACK_TITLE: Deploy flow / cancel
-          SLACK_COLOR: danger
-          SLACK_MESSAGE: Message for Cancel
+          SLACK_TITLE: Deploy flow / Success
+          SLACK_COLOR: good
+          SLACK_MESSAGE: Message for success
