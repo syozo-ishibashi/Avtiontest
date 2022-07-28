@@ -35,7 +35,7 @@ jobs:
         # run: |
         #   ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check  -efm='%f:%l:%c:%m'-f=phpcs -level=error
         #   ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'-f=phpcs -level=error
-        run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'-f=phpcs -level=error
+        run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-check -efm='%f:%l:%c:%m'-f=phpcs -level=error
 
 
   # 静的解析用
