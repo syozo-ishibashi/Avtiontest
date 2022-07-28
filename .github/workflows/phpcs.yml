@@ -4,7 +4,7 @@ on: pull_request
 
 
 env:
-  SLACK_WEBHOOK: SLACK_WEBHOOK_URL
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 # 構文チェック
 jobs:
