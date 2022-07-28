@@ -39,7 +39,6 @@ jobs:
       - name: Notify slack when job failed
         if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2.0.2
-        if: failure()
         env:
           SLACK_TITLE: Deploy flow / Failure
           SLACK_COLOR: danger
