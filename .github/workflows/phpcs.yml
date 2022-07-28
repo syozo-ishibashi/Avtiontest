@@ -39,6 +39,7 @@ jobs:
 
 
   # 静的解析用
+  # TODO baseline
   # config : phpstan.neon
   analyse:
     runs-on: ubuntu-latest
@@ -62,7 +63,7 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # working-directory: ./
-        run: ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
+        run: ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-check -f=phpstan -level=error
        
       - name: Success
         uses: rtCamp/action-slack-notify@v2.0.2
