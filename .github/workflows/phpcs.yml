@@ -38,54 +38,54 @@ jobs:
 
   # 静的解析用
   # config : phpstan.neon
-  analyse:
-    needs: lint
-    runs-on: ubuntu-latest
-    steps:
-      # リポジトリからチェックアウト
-      - uses: actions/checkout@v2
-      - uses: reviewdog/action-setup@v1
-        with:
-          reviewdog_version: latest
-      # PHP
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2 
-        with:
-          php-version: '8.0'
-          tools: composer:v2
-      # composer
-      - name: Resolve dependencies
-        run: composer require --dev phpstan/phpstan
-      # PHPStanを実行
-      - name: Run PHPstan
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # working-directory: ./
-        run: |
-          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-check  -f=phpstan -level=error
-          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
+  # analyse:
+  #   needs: lint
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # リポジトリからチェックアウト
+  #     - uses: actions/checkout@v2
+  #     - uses: reviewdog/action-setup@v1
+  #       with:
+  #         reviewdog_version: latest
+  #     # PHP
+  #     - name: Setup PHP
+  #       uses: shivammathur/setup-php@v2 
+  #       with:
+  #         php-version: '8.0'
+  #         tools: composer:v2
+  #     # composer
+  #     - name: Resolve dependencies
+  #       run: composer require --dev phpstan/phpstan
+  #     # PHPStanを実行
+  #     - name: Run PHPstan
+  #       env:
+  #         REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       # working-directory: ./
+  #       run: |
+  #         ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-check  -f=phpstan -level=error
+  #         ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
 
-  slack_notification:
-    if: always()
-    needs: analyse
-    runs-on: ubuntu-latest
-    steps:
-      - uses: technote-space/workflow-conclusion-action@v1
-      - run: |
-          echo ${{ env.WORKFLOW_CONCLUSION }}
+  # slack_notification:
+  #   if: always()
+  #   needs: analyse
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: technote-space/workflow-conclusion-action@v1
+  #     - run: |
+  #         echo ${{ env.WORKFLOW_CONCLUSION }}
 
-      - name: Notify slack when job failed
-        if: env.WORKFLOW_CONCLUSION == 'failure'
-        uses: rtCamp/action-slack-notify@v2.0.2
-        env:
-          SLACK_TITLE: Deploy flow / Failure
-          SLACK_COLOR: danger
-          SLACK_MESSAGE: Message for failure
+  #     - name: Notify slack when job failed
+  #       if: env.WORKFLOW_CONCLUSION == 'failure'
+  #       uses: rtCamp/action-slack-notify@v2.0.2
+  #       env:
+  #         SLACK_TITLE: Deploy flow / Failure
+  #         SLACK_COLOR: danger
+  #         SLACK_MESSAGE: Message for failure
 
-      - name: Notify slack when job success
-        if: env.WORKFLOW_CONCLUSION == 'success'
-        uses: rtCamp/action-slack-notify@v2.0.2
-        env:
-          SLACK_TITLE: Deploy flow / Success
-          SLACK_COLOR: good
-          SLACK_MESSAGE: Message for success
+  #     - name: Notify slack when job success
+  #       if: env.WORKFLOW_CONCLUSION == 'success'
+  #       uses: rtCamp/action-slack-notify@v2.0.2
+  #       env:
+  #         SLACK_TITLE: Deploy flow / Success
+  #         SLACK_COLOR: good
+  #         SLACK_MESSAGE: Message for success
