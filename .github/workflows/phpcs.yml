@@ -1,9 +1,9 @@
-name: reviewdog
+name: CI
 
 on: pull_request
 
-
 # 構文チェック
+# config : phpcs.xml
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -22,7 +22,6 @@ jobs:
       # composer install
       - name: Resolve dependencies
         run: composer require --dev squizlabs/php_codesniffer
-        # run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       # 構文チェック
       - name: lint
@@ -37,6 +36,7 @@ jobs:
 
 
   # 静的解析用
+  # config : Rule Levels -l 0
   analyse:
     runs-on: ubuntu-latest
     steps:
@@ -54,10 +54,9 @@ jobs:
       # composer
       - name: Resolve dependencies
         run: composer require --dev phpstan/phpstan
-        # run: composer install --no-progress --prefer-dist --optimize-autoloader
       # PHPStanを実行
       - name: Run PHPstan
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ./
-        run: ./vendor/bin/phpstan analyse -l 0 --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-check -f=phpstan -level=warnin
+        run: ./vendor/bin/phpstan analyse -l 0 --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-check -f=phpstan -level=warning
