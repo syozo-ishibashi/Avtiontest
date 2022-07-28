@@ -176,8 +176,6 @@ $b = 2;
 if($a < $b) {
     echo $a;
 }a  vb
-?>
-
 
 fssfd
 
@@ -190,3 +188,6 @@ if($a < $b) {
 
 
 fssfd
+?>
+
+
