@@ -3,7 +3,7 @@ a
     private function getReport()
     {
         return '返り値の型宣言をしていないメソッド';
-    }
+    }a
 $a = 1;
 $b = 2;
 if($a < $b) {
