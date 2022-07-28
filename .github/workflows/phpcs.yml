@@ -69,7 +69,6 @@ jobs:
         # run: ./vendor/bin/phpstan analyse -l 0 --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
         run: ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G --configuration=phpstan.neon | reviewdog -reporter=github-pr-review -f=phpstan -level=error
        
-  analyse:
       - name: Success
         uses: rtCamp/action-slack-notify@v2.0.2
         if: success()
