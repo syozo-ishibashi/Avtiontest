@@ -2,6 +2,9 @@ name: CI
 
 on: pull_request
 
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 # 構文チェック
 # config : phpcs.xml
 jobs:
@@ -28,15 +31,13 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ./
-        run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-check -efm='%f:%l:%c:%m' -level=warning
-        # run: ./vendor/bin/phpcbf --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m'
-
-      # - name: Exit code
-      #   run: exit 0
-
+        # run: ./vendor/bin/phpcbf
+        run: |
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check  -efm='%f:%l:%c:%m' -level=error
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
 
   # 静的解析用
-  # config : Rule Levels -l 0
+  # config : phpstan.neon
   analyse:
     runs-on: ubuntu-latest
     steps:
@@ -58,5 +59,29 @@ jobs:
       - name: Run PHPstan
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./
-        run: ./vendor/bin/phpstan analyse -l 0 --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-check -f=phpstan -level=warning
+        # working-directory: ./
+        run: ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
+       
+      - name: Success
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: success()
+        env:
+          SLACK_TITLE: Deploy flow / Success
+          SLACK_COLOR: good
+          SLACK_MESSAGE: Message for success
+
+      - name: Failure
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: failure()
+        env:
+          SLACK_TITLE: Deploy flow / Failure
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: Message for failure
+
+      - name: Cancel
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: cancelled()
+        env:
+          SLACK_TITLE: Deploy flow / cancel
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: Message for Cancel
