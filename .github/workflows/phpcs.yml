@@ -43,7 +43,7 @@ jobs:
 
 
   # 静的解析用
-  # config : phpstan.neon
+  # config : Level analyse -l 0
   analyse:
     runs-on: ubuntu-latest
     steps:
