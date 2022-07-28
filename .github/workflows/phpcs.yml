@@ -68,7 +68,7 @@ jobs:
   slack_notification:
     if: always()
     # needs: publish
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     # steps:
     #   - uses: technote-space/workflow-conclusion-action@v1
     #     run: |
