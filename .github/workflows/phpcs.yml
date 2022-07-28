@@ -31,12 +31,10 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ./
-        # プルリクさせない
-        run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check  -efm='%f:%l:%c:%m' -level=error
-        # プルリク可
-        # run: ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
-        # 自動整形
         # run: ./vendor/bin/phpcbf
+        run: |
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check  -efm='%f:%l:%c:%m' -level=error
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
 
   # 静的解析用
   # config : phpstan.neon
@@ -62,8 +60,7 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # working-directory: ./
-        run:  |
-          ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
+        run: ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
        
       - name: Success
         uses: rtCamp/action-slack-notify@v2.0.2
