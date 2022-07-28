@@ -5,6 +5,7 @@ on: pull_request
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  WORKFLOW_CONCLUSION: result
 
 # 構文チェック
 # config : phpcs.xml
