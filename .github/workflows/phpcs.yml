@@ -75,7 +75,7 @@ jobs:
       - run: |
           echo ${{ env.WORKFLOW_CONCLUSION }}
       - name: Notify slack when job failed
-        if: ${{ failure() }}
+        if: env.WORKFLOW_CONCLUSION == 'failure'
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_TITLE: Deploy flow / Failure
