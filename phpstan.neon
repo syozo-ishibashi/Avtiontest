@@ -1,0 +1,6 @@
+<!-- Rule Levels -l 0 -->
+parameters:
+    paths:
+        - src
+        - test
+    level: 0
