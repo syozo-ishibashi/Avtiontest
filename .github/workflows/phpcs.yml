@@ -72,8 +72,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: technote-space/workflow-conclusion-action@v1
+                # echo "let's see the workflow conclusion"
       - run: |
-          echo "let's see the workflow conclusion"
           echo ${{ env.WORKFLOW_CONCLUSION }}
       # - name: Notify slack when job failed
       #   # if: ${{ failure() }}
