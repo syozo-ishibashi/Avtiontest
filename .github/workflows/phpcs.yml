@@ -74,7 +74,6 @@ jobs:
       - uses: technote-space/workflow-conclusion-action@v1
         run: |
           echo "let's see the workflow conclusion"
-          echo ${{ env.WORKFLOW_CONCLUSION }}
       # - name: Notify slack when job failed
       #   # if: ${{ failure() }}
       #   uses: rtCamp/action-slack-notify@v2.0.2
