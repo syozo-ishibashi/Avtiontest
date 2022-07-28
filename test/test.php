@@ -1,4 +1,5 @@
 <?php
+a
     private function getReport()
     {
         return '返り値の型宣言をしていないメソッド';
