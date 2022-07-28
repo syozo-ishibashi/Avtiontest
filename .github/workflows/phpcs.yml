@@ -70,9 +70,8 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
-      - name: status
       - uses: technote-space/workflow-conclusion-action@v1
-      - run: |
+        run: |
           echo "let's see the workflow conclusion"
           echo ${{ env.WORKFLOW_CONCLUSION }}
       # - name: Notify slack when job failed
