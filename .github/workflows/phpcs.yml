@@ -18,7 +18,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    time-outminutes: 10
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-setup@v1
@@ -49,7 +49,7 @@ jobs:
   analyse:
     needs: lint
     runs-on: ubuntu-latest
-    time-outminutes: 10
+    timeout-minutes: 10
     steps:
       # リポジトリからチェックアウト
       - uses: actions/checkout@v2
