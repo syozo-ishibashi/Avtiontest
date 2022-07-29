@@ -6,8 +6,8 @@ on:
       paths:
         - '**.js'
         - '**.php'
-        #     branches:
-        #  - main
+      branches:
+        - main
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
