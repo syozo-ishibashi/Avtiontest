@@ -11,7 +11,7 @@ env:
 jobs:
   discussion_created:
     runs-on: ubuntu-20.04
-    if: ${{ github.event.discussion && !github.event.comment }}
+    # if: ${{ github.event.discussion && !github.event.comment }}
     steps:
       # - name: Send GitHub Discussion Notification to Slack
         # Note: 
