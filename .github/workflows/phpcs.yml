@@ -3,11 +3,11 @@ name: CI
 
 on: 
   pull_request:
-    branches:
-     - main
-      # paths:
-      #   - '**.js'
-      #   - '**.php'
+      paths:
+        - '**.js'
+        - '**.php'
+        #     branches:
+        #  - main
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
