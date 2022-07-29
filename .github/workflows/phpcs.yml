@@ -1,7 +1,13 @@
 name: CI
 # reviewdog でプルリクできないように管理
 
-on: pull_request
+on: 
+  pull_request:
+      paths:
+        - '**.js'
+        - '**.php'
+      branches:
+        - main
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -12,6 +18,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-setup@v1
@@ -34,7 +41,7 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # working-directory: ./
         run: |
-          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check -efm='%f:%l:%c:%m' -level=error
+          ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-check  -efm='%f:%l:%c:%m' -level=error
           ./vendor/bin/phpcs --report=emacs --standard=phpcs.xml ./ | reviewdog -reporter=github-pr-review -efm='%f:%l:%c:%m' -level=error
 
   # 静的解析用
@@ -42,6 +49,7 @@ jobs:
   analyse:
     needs: lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       # リポジトリからチェックアウト
       - uses: actions/checkout@v2

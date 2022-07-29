@@ -83,7 +83,7 @@ if($a < $b) {
 
 
 $a = 1;
-$b = 2;
+$b = 2;s
 if($a < $b) {
     echo $a;
 }a  vb
