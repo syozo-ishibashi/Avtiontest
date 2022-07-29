@@ -1,10 +1,9 @@
 name: CI
-# reviewdog でプルリクできないように管理
+# reviewdog でプルリクできないようGITHUBの設定で管理
 
 on: 
   pull_request:
       paths:
-        - '**.js'
         - '**.php'
       branches:
         - main
