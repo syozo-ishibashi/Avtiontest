@@ -197,6 +197,10 @@ if($a < $b) {
     echo $a;
 }a  vb
 
+
+echo $a;
+}a  vb
+
 ?>
 
 
