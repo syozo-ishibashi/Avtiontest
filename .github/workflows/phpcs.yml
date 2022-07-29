@@ -5,6 +5,9 @@ on:
   pull_request:
     branches:
      - main
+      paths:
+        - '**.js'
+        - '**.php'
 
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -15,6 +18,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    time-outminutes: 10
     steps:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-setup@v1
@@ -45,6 +49,7 @@ jobs:
   analyse:
     needs: lint
     runs-on: ubuntu-latest
+    time-outminutes: 10
     steps:
       # リポジトリからチェックアウト
       - uses: actions/checkout@v2
@@ -70,6 +75,7 @@ jobs:
           ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
 
   slack_notification:
+  time-outminutes: 5
     if: always()
     needs: analyse
     runs-on: ubuntu-latest
