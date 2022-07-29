@@ -1,4 +1,4 @@
 parameters:
     paths:
         - test
-    level: 0
+    level: 9
