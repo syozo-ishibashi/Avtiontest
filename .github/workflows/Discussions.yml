@@ -13,27 +13,9 @@ jobs:
     runs-on: ubuntu-20.04
     # if: ${{ github.event.discussion && !github.event.comment }}
     steps:
-      # - name: Send GitHub Discussion Notification to Slack
-        # Note: 
-        # - 一度変数に入れることで、$や`をエスケープしている
-        # - https://stackoverflow.com/questions/69982822/is-there-a-way-to-escape-and-single-quotes-together-in-bash
-        # - printfしないといい感じに"\n"が変換されない
-        # run: |
-        #   title=$(
-        #   cat <<"EOF"
-        #   ${{ env.DISCUSSION_TITLE }}
-        #   EOF
-        #   )
-        #   body=$(
-        #   cat <<"EOF"
-        #   ${{ env.DISCUSSION_BODY }}
-        #   EOF
-        #   )
-        #   # printf -v markdown_message_unescaped %b "<${{ env.DISCUSSION_URL }}|*$title*>\n$body"
-        #   # jq -n -r --arg text "$markdown_message_unescaped" '{"token":"${{ secrets.SLACK_BOT_TOKEN }}","channel":"${{ env.CHANNEL_ID }}","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"New Discussion by <${{ env.USER_URL }}|${{ env.USER_NAME }}>"}}],"attachments":[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":$text}}]}]}'|curl -X POST -H 'Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}' -H "Content-Type: application/json" -d @- https://slack.com/api/chat.postMessage
       - name: Success
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_TITLE: ${{ env.DISCUSSION_TITLE }}
           SLACK_COLOR: good
-          SLACK_MESSAGE: Message for success
+          SLACK_MESSAGE: ${{ env.DISCUSSION_BODY }}
