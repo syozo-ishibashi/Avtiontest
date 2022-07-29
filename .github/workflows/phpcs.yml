@@ -75,7 +75,6 @@ jobs:
           ./vendor/bin/phpstan analyse --error-format=raw --no-progress --memory-limit=1G | reviewdog -reporter=github-pr-review -f=phpstan -level=error
 
   slack_notification:
-  time-outminutes: 5
     if: always()
     needs: analyse
     runs-on: ubuntu-latest
