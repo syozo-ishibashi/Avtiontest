@@ -1,21 +1,21 @@
-name: Discussions Notification
-on:
-  discussion:
-    types: [created]
-  discussion_comment:
-    types: [created]
+# name: Discussions Notification
+# on:
+#   discussion:
+#     types: [created]
+#   discussion_comment:
+#     types: [created]
 
-env:
-  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+# env:
+#   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-jobs:
-  discussion_created:
-    runs-on: ubuntu-20.04
-    # if: ${{ github.event.discussion && !github.event.comment }}
-    steps:
-      - name: Success
-        uses: rtCamp/action-slack-notify@v2.0.2
-        env:
-          SLACK_TITLE: ${{ env.DISCUSSION_TITLE }}
-          SLACK_COLOR: good
-          SLACK_MESSAGE: ${{ env.DISCUSSION_BODY }}
+# jobs:
+#   discussion_created:
+#     runs-on: ubuntu-20.04
+#     # if: ${{ github.event.discussion && !github.event.comment }}
+#     steps:
+#       - name: Success
+#         uses: rtCamp/action-slack-notify@v2.0.2
+#         env:
+#           SLACK_TITLE: ${{ env.DISCUSSION_TITLE }}
+#           SLACK_COLOR: good
+#           SLACK_MESSAGE: ${{ env.DISCUSSION_BODY }}
