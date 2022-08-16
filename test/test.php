@@ -196,7 +196,7 @@ $b = 2;
 if($a < $b) {
     echo $a;
 }a  vb
-
+aa
 ?>
 
 
