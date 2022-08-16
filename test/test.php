@@ -191,7 +191,7 @@ if($a < $b) {
     echo $a;
 }a  vb
 
-$a = 1;
+$a = 1;a
 $b = 2;
 if($a < $b) {
     echo $a;
