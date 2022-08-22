@@ -1,33 +1,32 @@
 # Keep a changelog
-# https://r7kamura.com/articles/2022-07-18-release-notes-management
-- name: add
+- name: Add
   description: Add new features
   color: B60205
 
-- name: change
+- name: Change
   description: Change existing functionality
   color: d73a4a
 
-- name: deprecate
+- name: Deprecate
   description: Mark as soon-to-be removed features
   color: 0075ca
 
-- name: fix
+- name: Fix
   description: Fix bug
   color: 0E8A16
 
-- name: remove
+- name: Remove
   description: Remove features
   color: cfd3d7
 
-- name: security
+- name: Security
   description: In case of vulnerabilities.
   color: D93F0B
 
-- name: other
+- name: Other
   description: Change development environment or CI service fix..
   color: C2E0C6
 
-- name: onboarding
+- name: Onboarding
   description: onboarding
-  color: other
+  color: D4C5F9
