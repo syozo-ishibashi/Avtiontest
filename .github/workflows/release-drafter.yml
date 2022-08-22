@@ -21,6 +21,7 @@ jobs:
       # otherwise, read permission is required at least
       pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
@@ -35,32 +36,3 @@ jobs:
         #   disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-# test
-# test
-
-# リリース
-# on:
-#   push:
-#     tags:
-#       - 'v*'
-
-# name: Create Release
-
-# jobs:
-#   build:
-#     name: Create Release
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@master
-#       - name: Create Release
-#         id: create_release
-#         uses: actions/create-release@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           tag_name: ${{ github.event.pull_request.title }}
-#           release_name: ${{ github.event.pull_request.title }}
-#           body: ${{ github.event.pull_request.body }}
-#           draft: true
-#           prerelease: false

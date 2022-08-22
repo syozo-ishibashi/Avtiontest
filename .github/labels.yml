@@ -1,32 +1,40 @@
 # Keep a changelog
+#  新機能。
 - name: Add
   description: Add new features
   color: B60205
 
+# 既存機能の変更。
 - name: Change
   description: Change existing functionality
   color: d73a4a
 
+# 今後のリリースで削除されるもの。
 - name: Deprecate
   description: Mark as soon-to-be removed features
   color: 0075ca
 
+# バグの修正。
 - name: Fix
   description: Fix bug
   color: 0E8A16
 
+# 今回のリリースで削除されたDeprecatedな機能。
 - name: Remove
   description: Remove features
   color: cfd3d7
 
+# 脆弱性に関するもの。
 - name: Security
   description: In case of vulnerabilities.
   color: D93F0B
 
+# 環境依存、CI
 - name: Other
   description: Change development environment or CI service fix..
   color: C2E0C6
 
+# オンボーディング
 - name: Onboarding
   description: onboarding
   color: D4C5F9
