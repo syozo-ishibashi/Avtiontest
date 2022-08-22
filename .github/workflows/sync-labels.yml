@@ -1,11 +1,15 @@
+# Label自動作成
 name: Sync labels in the declarative way
 on:
   push:
     branches:
       - main
+    # branches-ignore:
+    #   - '**'
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@1.0.0
       - uses: micnncim/action-label-syncer@v0.3.1
