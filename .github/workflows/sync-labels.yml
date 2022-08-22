@@ -1,4 +1,4 @@
-# Label自動作成
+# Label 自動作成
 name: Sync labels in the declarative way
 on:
   push:
