@@ -1,9 +1,26 @@
-- name: bug
-  description: Something isn't working
+# Keep a changelog
+# https://r7kamura.com/articles/2022-07-18-release-notes-management
+- name: add
+  description: Add new features
+  color: B60205
+- name: change
+  description: Change existing functionality
   color: d73a4a
-- name: documentation
-  description: Improvements or additions to documentation
+- name: deprecate
+  description: Mark as soon-to-be removed features
   color: 0075ca
-- name: duplicate
-  description: This issue or pull request already exists
+- name: fix
+  description: Fix bug
   color: cfd3d7
+- name: remove
+  description: Remove features
+  color: cfd3d7
+- name: security
+  description: In case of vulnerabilities.
+  color: cfd3d7
+- name: other
+  description: Change development environment or CI service fix..
+  color: cfd3d7
+- name: onboarding
+  description: onboarding
+  color: other
