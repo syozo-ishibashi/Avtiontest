@@ -38,7 +38,7 @@ template: |
 
   $CHANGES
 
-# autolabeler:
+#a autolabeler:
 #   - label: Add
 #     branch:
 #       - '/^feat(ure)?[/-].+/'
