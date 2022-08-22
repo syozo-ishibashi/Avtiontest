@@ -1,6 +1,4 @@
 # リリースノート作成自動化
-# https://developer.dip-net.co.jp/entry/2020/07/10/GitHub_Actions%E3%81%A7%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%8E%E3%83%BC%E3%83%88%E4%BD%9C%E6%88%90%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%97%E3%81%A6%E3%81%BF%E3%81%9F
-
 name: Release Drafter
 on:
   push:
@@ -21,7 +19,7 @@ jobs:
       # otherwise, read permission is required at least
       pull-requests: write
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 0
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
