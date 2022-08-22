@@ -37,3 +37,59 @@ template: |
   ## Changes
 
   $CHANGES
+
+# autolabeler:
+#   - label: Add
+#     branch:
+#       - '/^feat(ure)?[/-].+/'
+#   - label: Change
+#     branch:
+#       - '/^fix[/-].+/'
+#   - label: Deprecate
+#     branch:
+#       - '/^chore[/-].+/'
+#   - label: Remove
+#     branch:
+#       - '/(refactor|refactoring)[/-].+/'
+#   - label: Fix
+#     branch:
+#       - '/doc(umentation)[/-].+/'
+#     files:
+#       - '*.md'
+#   - label: Security
+#     branch:
+#       - '/(enhancement|improve)[/-].+/'
+#   - label: Other
+#     branch:
+#       - '/(enhancement|improve)[/-].+/'
+#   - label: Onboarding
+#     branch:
+#       - '/(enhancement|improve)[/-].+/'
+
+autolabeler:
+  - label: Add
+    branch:
+      - '/^feat(ure)?[/-].+/'
+  - label: Change
+    branch:
+      - '/^fix[/-].+/'
+  - label: Deprecate
+    branch:
+      - '/^chore[/-].+/'
+  - label: Remove
+    branch:
+      - '/(refactor|refactoring)[/-].+/'
+  - label: Fix
+    branch:
+      - '/doc(umentation)[/-].+/'
+    files:
+      - '*.md'
+  - label: Security
+    branch:
+      - '/(enhancement|improve)[/-].+/'
+  - label: Other
+    branch:
+      - '/(enhancement|improve)[/-].+/'
+  - label: Onboarding
+    branch:
+      - '/(enhancement|improve)[/-].+/'
