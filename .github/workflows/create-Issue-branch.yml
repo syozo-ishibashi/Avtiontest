@@ -9,6 +9,7 @@ name: CreateIssueBranch
 jobs:
   create_issue_branch_sjob:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
       - name: Create Issue Branch
         uses: robvanderleek/create-issue-branch@main

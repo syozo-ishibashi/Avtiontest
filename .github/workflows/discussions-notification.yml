@@ -1,3 +1,4 @@
+# github subscribe owner/repo discussions　で通知できるので不要かも
 on:
   discussion:
     types: [created]
