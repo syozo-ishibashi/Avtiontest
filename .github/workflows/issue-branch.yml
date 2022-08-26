@@ -10,7 +10,8 @@
 # '${issue.number}-${issue.title}' => Issueの番号-Issueのタイトル。例： ”37-ImprovePerformanceForReviewGrid”　となる
 
 # branchName: 'issue-${issue.number}'
-branchName: short
+# branchName: short
+branchName: tiny
 
 # プルリクエストのマージ後にIssueを自動的に閉じる機能の有効無効
 # 自動的に閉じるには"issue-XX"あるいは"iXX"（XXはIssue番号）のようなブランチ名が設定されている必要がある。
