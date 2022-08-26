@@ -1,3 +1,4 @@
+branchName: 'a'
 # Issue作成時に自動的に作成されるブランチの名称ルールを設定する
 
 # 組み込みの指定は以下です。”branchName: tiny”のように利用できます。　
@@ -9,9 +10,7 @@
 # https://github.com/robvanderleek/create-issue-branch/blob/main/tests/test-fixtures/issues.assigned.json
 # '${issue.number}-${issue.title}' => Issueの番号-Issueのタイトル。例： ”37-ImprovePerformanceForReviewGrid”　となる
 
-branchName: 'issue-ora'
-# branchName: short
-branchName: tiny
+# branchName: 'issue-${issue.number}'
 
 # プルリクエストのマージ後にIssueを自動的に閉じる機能の有効無効
 # 自動的に閉じるには"issue-XX"あるいは"iXX"（XXはIssue番号）のようなブランチ名が設定されている必要がある。
@@ -22,6 +21,3 @@ autoCloseIssue: true
 # falseの場合、Assigneesが入れば自動でブランチが作成される。(IssuesAssignAuthor.ymlと組み合わせることでアサインも自動化可能)
 
 silent: false
-
-# デフォルトのソースブランチ
-defaultBranch: 'staging'
