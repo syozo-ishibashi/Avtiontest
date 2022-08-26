@@ -20,3 +20,6 @@ autoCloseIssue: true
 # falseの場合、Assigneesが入れば自動でブランチが作成される。(IssuesAssignAuthor.ymlと組み合わせることでアサインも自動化可能)
 
 silent: false
+
+# デフォルトのソースブランチ
+defaultBranch: 'staging'
