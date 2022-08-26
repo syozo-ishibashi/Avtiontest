@@ -9,7 +9,7 @@
 # https://github.com/robvanderleek/create-issue-branch/blob/main/tests/test-fixtures/issues.assigned.json
 # '${issue.number}-${issue.title}' => Issueの番号-Issueのタイトル。例： ”37-ImprovePerformanceForReviewGrid”　となる
 
-# branchName: 'issue-${issue.number}'
+branchName: 'issue-ora'
 # branchName: short
 branchName: tiny
 
